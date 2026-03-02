@@ -17,20 +17,20 @@ class Color {
 
     public:
         // constructors
-        Color() { // with no arguments, initialize all values to 0
+        Color() { // use default values of 0 if there are no arguments
             red = 0;
             green = 0;
             blue = 0;
         }
 
         Color(int r, int g, int b) { setColor(r, g, b); }
-        // uses the set function to include data validation
+        // uses the set function because that includes data validation
 
         // setters
         // these are intended for hard-coded rgb values, not user input
         // so they substitute values of 0 rather than ending the program or asking for another input
         void setColor(int r, int g, int b) { // provide all three values to set the color
-        // just calls all three setters for convenience
+        // set all three colors at once for convenience
             setRed(r);
             setGreen(g);
             setBlue(b);
@@ -64,12 +64,12 @@ class Color {
         }
         
         // getters
-        int getRed() { return red; } // inline function to return the red value
-        int getGreen() { return green; } // inline function to return the red value
-        int getBlue() { return blue; } // inline function to return the red value
+        int getRed() const { return red; } // inline function to return the red value
+        int getGreen() const { return green; } // inline function to return the red value
+        int getBlue() const { return blue; } // inline function to return the red value
 
         // other function
-        void print() { // display the three values
+        void print() const { // display the three values
             cout << fixed << setw(6) << red;
             cout << fixed << setw(6) << green;
             cout << fixed << setw(6) << blue << endl;
@@ -78,10 +78,10 @@ class Color {
 
 int main() {
     vector<Color*> colors; // pointers to the colors so it's easy to print them all
-    // not just a vector of colors because this way we can change it after we add them
+    // not just a vector of colors because this way we can change values after we add them
 
     cout << "Creating example colors ..." << endl;
-    Color c1(-1, 1, 1);
+    Color c1(-1, 1, 1); // example of invalid value for red
     colors.push_back(&c1);
     c1.setColor(122, 28, 255);
     c1.setRed(50);
@@ -90,12 +90,16 @@ int main() {
     colors.push_back(&c2);
     c2.setBlue(80);
     
-    Color c3(255, 255, 255);
+    Color c3(255, 256, 255); // example of invalid value for green
     colors.push_back(&c3);
     
     Color c4;
     colors.push_back(&c4);
     c4.setColor(100, 20, 50);
+
+    Color c5(255, 255, 255);
+    colors.push_back(&c5);
+    c5.setGreen(120);
 
     cout << "Example colors:" << endl;
     cout << fixed << setw(6) << "red" << setw(6) << "green" << setw(6) << "blue" << endl;
