@@ -15,10 +15,18 @@ class Color {
     }
 
     public:
+        // constructor
+        Color(int r, int g, int b) { setColor(r, g, b); }
+        // uses the set function to include data validation
+
         // setters
         // these are intended for hard-coded rgb values, not user input
-        // so it uses values of 0 rather than ending the program or asking for another input
+        // so they substitute values of 0 rather than ending the program or asking for another input
         void setColor(int r, int g, int b) { // provide all three values to set the color
+        // just calls all three setters for convenience
+            setRed(r);
+            setGreen(g);
+            setBlue(b);
         }
         
         void setRed(int r) {  // set/change just the red value
@@ -55,15 +63,21 @@ class Color {
 
         // other function
         void print() { // display the three values
-            cout << "red: " << red << ", ";
-            cout << "green: " << green << ", ";
-            cout << "blue: " << blue << endl;
+            cout << fixed << setw(6) << red;
+            cout << fixed << setw(6) << green;
+            cout << fixed << setw(6) << blue << endl;
         }
 };
 
 int main() {
-    Color c1;
-    c1.setColor(0, 0, 255);
+    cout << "Creating example colors ..." << endl;
+    Color c1(-1, 1, 1);
+    c1.setColor(122, 0, 255);
+    c1.setRed(50);
+    cout << "Example colors:" << endl;
+    cout << fixed << setw(6) << "red" << setw(6) << "green" << setw(6) << "blue" << endl;
     c1.print();
+
+
     return 0;
 }
