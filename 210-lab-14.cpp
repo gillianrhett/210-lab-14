@@ -1,6 +1,7 @@
 // COMSC210 | Lab 14 | Gillian Rhett
 #include <iostream>
 #include <iomanip>
+#include <vector>
 
 using namespace std;
 
@@ -15,7 +16,13 @@ class Color {
     }
 
     public:
-        // constructor
+        // constructors
+        Color() { // with no arguments, initialize all values to 0
+            red = 0;
+            green = 0;
+            blue = 0;
+        }
+
         Color(int r, int g, int b) { setColor(r, g, b); }
         // uses the set function to include data validation
 
@@ -70,14 +77,30 @@ class Color {
 };
 
 int main() {
+    vector<Color*> colors; // pointers to the colors so it's easy to print them all
+    // not just a vector of colors because this way we can change it after we add them
+
     cout << "Creating example colors ..." << endl;
     Color c1(-1, 1, 1);
-    c1.setColor(122, 0, 255);
+    colors.push_back(&c1);
+    c1.setColor(122, 28, 255);
     c1.setRed(50);
+    
+    Color c2;
+    colors.push_back(&c2);
+    c2.setBlue(80);
+    
+    Color c3(255, 255, 255);
+    colors.push_back(&c3);
+    
+    Color c4;
+    colors.push_back(&c4);
+    c4.setColor(100, 20, 50);
+
     cout << "Example colors:" << endl;
     cout << fixed << setw(6) << "red" << setw(6) << "green" << setw(6) << "blue" << endl;
-    c1.print();
-
+    for (Color* eachColor : colors)
+        (*eachColor).print();
 
     return 0;
 }
